@@ -105,7 +105,9 @@ exports.parseFtpEntries = function parseFtpEntries(listing, callback) {
   async.eachSeries(entries, function(entry, next) {
     function _next() {
       i += 1;
-      next();
+      process.nextTick(function() {
+        next();
+      });
     }
 
     // Some servers include an official code-multiline sign at the beginning
